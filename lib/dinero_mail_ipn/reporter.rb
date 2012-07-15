@@ -31,7 +31,7 @@ module DineroMailIpn
       @doc.xpath("//operacion").map do |report_xml|
         DineroMailIpn::Report.new :id => report_xml.xpath("//id").text,
                                   :amount => report_xml.xpath("//monto").text.to_f,
-                                  :state => report_xml.xpath("//estado").text,
+                                  :state => report_xml.xpath("//estado").text.to_i,
                                   :payer_email => report_xml.xpath("//comprador").xpath("//email").text,
                                   :numtransaction => report_xml.xpath("//numtransaccion").text,
                                   :fecha          => report_xml.xpath("//fecha").text.to_time
