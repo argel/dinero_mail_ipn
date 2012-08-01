@@ -13,7 +13,7 @@ module DineroMailIpn
     INVALID_PASSWORD_OR_ACCOUNT_NUMBER_REQUEST_STATUS = 7
     TRANSACTION_NOT_FOUND_REQUEST_STATUS = 8
 
-    attr_reader :reports, :doc
+    attr_reader :reports
 
     def initialize(xml_response)
       @doc = Nokogiri::XML(xml_response.downcase)
