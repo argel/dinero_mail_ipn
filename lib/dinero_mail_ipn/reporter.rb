@@ -28,13 +28,13 @@ module DineroMailIpn
 
     def build_reports
       return [] if @doc.xpath("//operacion").empty?
-      @doc.xpath("//operacion").map do |report_xml|
-        DineroMailIpn::Report.new :id => report_xml.xpath("//id").text,
-                                  :amount => report_xml.xpath("//monto").text.to_f,
-                                  :state => report_xml.xpath("//estado").text.to_i,
-                                  :payer_email => report_xml.xpath("//comprador").xpath("//email").text,
-                                  :numtransaction => report_xml.xpath("//numtransaccion").text,
-                                  :fecha          => (report_xml.xpath("//fecha").text.to_time rescue nil)
+      @doc.css("operacion").map do |report_xml|
+        DineroMailIpn::Report.new :id => report_xml.css("id").text,
+                                  :amount => report_xml.css("monto").text.to_f,
+                                  :state => report_xml.css("estado").text.to_i,
+                                  :payer_email => report_xml.css("comprador email").text,
+                                  :numtransaction => report_xml.css("numtransaccion").text,
+                                  :fecha          => (report_xml.css("fecha").text.to_time rescue nil)
       end
     end
 
